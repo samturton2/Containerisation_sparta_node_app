@@ -10,4 +10,4 @@ RUN npm install
 
 EXPOSE 3000
 
-CMD ["node", "start", "app.js";]
+CMD ["node", "app.js"]

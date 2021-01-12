@@ -5,13 +5,13 @@
 ```dockerfile
 FROM node:latest
 ```
-- Copy the app folder in this working directory to the container usr/src/ directory
-```dockerfile
-COPY app/ /usr/src
-```
 - Create the working directory in the container
 ```dockerfile
 WORKDIR /usr/src/app
+```
+- Copy the app folder in this working directory to the container usr/src/ directory
+```dockerfile
+COPY app/ .
 ```
 - run the npm install command
 ```dockerfile
@@ -23,7 +23,7 @@ EXPOSE 3000
 ```
 - Start the app
 ```dockerfile
-CMD ["node", "start", "app.js"]
+CMD ["node", app.js"]
 ```
 
 ## Build image
@@ -38,3 +38,6 @@ docker build -t sturton/containerisation_sparta_node_app .
 ```bash
 docker run -d -p 80:3000 sturton/containerisation_sparta_node_app
 ```
+- This should show on the local host port
+![](img/port80.png)
+- The image can now be used using the `sturton/containerisation_sparta_node_app`
