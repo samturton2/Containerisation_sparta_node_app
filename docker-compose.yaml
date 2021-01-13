@@ -4,17 +4,27 @@ services:
   app:
     container_name: nodeapp_container
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./app/
+      dockerfile: app.dockerfile
     environment:
-      - DB_HOST=127.0.0.1:27017
+      - DB_HOST=db:27017
     ports:
       - "80:3000"
     links:
       - db
+    networks: 
+      - nodeapp-network
   db:
-    image: mongo
     container_name: mongodb_for_nodeapp
+    build:
+      context: ./db/
+      dockerfile: db.dockerfile
     ports:
       - "27017:27017"
     restart: unless-stopped
+    networks: 
+      - nodeapp-network
+
+networks:
+  nodeapp-network:
+    driver: bridge

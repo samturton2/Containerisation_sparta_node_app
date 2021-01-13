@@ -72,3 +72,43 @@ CMD ["node", "app.js"]
 
 - this makes the same container 1/8th of the size
 ![](img/multistagebuild.png)
+
+# Adding the DB
+- to connect multiple containers together and launch as one we will need a docker-compose file.
+- I have put both services in a network, for best practise if the microservice architecture were to be larger.
+```yaml
+version: "3.8"
+
+services:
+  app:
+    container_name: nodeapp_container
+    build:
+      context: ./app/
+      dockerfile: app.dockerfile
+    environment:
+      - DB_HOST=db:27017
+    ports:
+      - "80:3000"
+    links:
+      - db
+    networks: 
+      - nodeapp-network
+  db:
+    container_name: mongodb_for_nodeapp
+    build:
+      context: ./db/
+      dockerfile: db.dockerfile
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+    networks: 
+      - nodeapp-network
+
+networks:
+  nodeapp-network:
+    driver: bridge
+```
+- The docker-compose file is a yaml file ran with the command
+```bash
+docker-compose up
+```

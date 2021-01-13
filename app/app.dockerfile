@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 # path to working directory inside the container
 
 #copy the required dependencies
-copy ./app/ . 
+copy . . 
 
 FROM node:alpine
 # building a multi stage layer
@@ -21,4 +21,8 @@ RUN npm install
 
 EXPOSE 3000
 
+# run seeds for posts page
+CMD ["npm", "run", "/usr/src/app/seeds/seed.js;"]
+
+# run the app
 CMD ["node", "app.js"]
