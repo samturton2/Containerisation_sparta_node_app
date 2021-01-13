@@ -112,7 +112,7 @@ networks:
 ```bash
 docker-compose up
 ```
-- The DB was declared in the [db.dockerfile](https://github.com/samturton2/Containerisation_sparta_node_app/blob/docker_layer/db/db.dockerfile)
+- The DB was declared in the [db.dockerfile](https://github.com/samturton2/Containerisation_sparta_node_app/blob/main/db/db.dockerfile)
 ```dockerfile
 FROM mongo:latest
 
