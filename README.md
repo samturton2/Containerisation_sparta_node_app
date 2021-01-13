@@ -86,11 +86,11 @@ services:
       context: ./app/
       dockerfile: app.dockerfile
     environment:
-      - DB_HOST=db:27017
+      - DB_HOST=db:27017 # This sets an environment variable for the db
     ports:
       - "80:3000"
     links:
-      - db
+      - db # Links the alias of the db container
     networks: 
       - nodeapp-network
   db:
@@ -112,3 +112,21 @@ networks:
 ```bash
 docker-compose up
 ```
+- The DB was declared in the [db.dockerfile](https://github.com/samturton2/Containerisation_sparta_node_app/blob/docker_layer/db/db.dockerfile)
+```dockerfile
+FROM mongo:latest
+
+WORKDIR /usr/src/db/
+
+COPY ./mongod.conf /etc/
+
+EXPOSE 27017
+
+CMD ["mongod"]
+```
+- The container was ran with mongo's latest image. with port 27017 exposed.
+
+- Once ```docker-compose up``` was ran we should see the app working on the fibonacci page URL `localhost/fibonacci/4`
+![](img/fibonacci.png)
+- And the posts page working on the URL `localhost/posts`
+![](img/posts.png)
