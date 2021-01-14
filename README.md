@@ -110,8 +110,10 @@ networks:
 ```
 - The docker-compose file is a yaml file ran with the command
 ```bash
-docker-compose up
+docker-compose up -d
 ```
+- The -d means the container is ran detached so other contianers can run.
+
 - The DB was declared in the [db.dockerfile](https://github.com/samturton2/Containerisation_sparta_node_app/blob/main/db/db.dockerfile)
 ```dockerfile
 FROM mongo:latest
@@ -126,7 +128,7 @@ CMD ["mongod"]
 ```
 - The container was ran with mongo's latest image. with port 27017 exposed.
 
-- Once ```docker-compose up``` was ran we should see the app working on the fibonacci page URL `localhost/fibonacci/4`
+- Once ```docker-compose up -d``` was ran we should see the app working on the fibonacci page URL `localhost/fibonacci/4`
 ![](img/fibonacci.png)
 - And the posts page working on the URL `localhost/posts`
 ![](img/posts.png)

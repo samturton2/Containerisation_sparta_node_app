@@ -7,7 +7,10 @@ WORKDIR /usr/src/app
 # path to working directory inside the container
 
 #copy the required dependencies
-copy . . 
+COPY . . 
+
+#copy all the package files so seeds works
+COPY package*.json .
 
 FROM node:alpine
 # building a multi stage layer
